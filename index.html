@@ -102,6 +102,33 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
 
+		/* Social Link Styling */
+        .social-btn {
+            display: flex;
+            align-items: center;
+            padding: 0.6rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-btn:hover {
+            background: var(--primary-color);
+            transform: translateX(5px);
+            border-color: var(--primary-color);
+        }
+
+        .social-btn i {
+            width: 20px;
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
         /* Tối ưu khi in */
         @media print {
             body {
@@ -174,12 +201,12 @@
 
                 <!-- Mạng xã hội -->
                 <div>
-                    <h3 class="text-[11px] font-bold uppercase border-b border-slate-600 pb-2 mb-4 text-blue-400 tracking-[0.15em]">Mạng xã hội</h3>
+                    <h3 class="text-xs font-bold uppercase border-b border-slate-600 pb-2 mb-4 text-blue-400 tracking-widest">Mạng xã hội</h3>
                     <a href="https://www.facebook.com/BuiThanhChuong.NN" target="_blank" class="social-btn">
-                        <i class="fab fa-facebook-f w-5 text-blue-400"></i> Facebook
+                        <i class="fab fa-facebook-f text-blue-500"></i> Facebook
                     </a>
                     <a href="https://www.instagram.com/thanhchuong__" target="_blank" class="social-btn">
-                        <i class="fab fa-instagram w-5 text-pink-400"></i> Instagram
+                        <i class="fab fa-instagram text-pink-500"></i> Instagram
                     </a>
                 </div>
 
@@ -289,4 +316,5 @@
 
 </body>
 </html>
+
 
