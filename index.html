@@ -10,91 +10,65 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
         :root {
-            --primary-color: #3b82f6;
+            --primary-color: #2563eb;
             --sidebar-bg: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            overflow-x: hidden;
+            background-color: #e2e8f0;
+            margin: 0;
+            padding: 0;
         }
 
-        /* Animation: Fade in on load */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .cv-container {
-            max-width: 900px;
-            margin: 2rem auto;
+        /* Khung CV chuẩn khổ A4 */
+        .cv-page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
             background: white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
             display: flex;
-            flex-direction: row;
-            min-height: 1100px;
-        }
-
-        /* Responsive Mobile Layout */
-        @media (max-width: 768px) {
-            .cv-container {
-                flex-direction: column;
-                margin: 0;
-            }
-            .sidebar {
-                width: 100%;
-                padding: 1.5rem;
-            }
-            .main-content {
-                width: 100%;
-                padding: 1.5rem;
-            }
-            .profile-img-container {
-                width: 140px;
-                height: 140px;
-            }
+            overflow: hidden;
+            position: relative;
         }
 
         .sidebar {
-            width: 35%;
+            width: 32%;
             background-color: var(--sidebar-bg);
             color: white;
-            padding: 2.5rem 1.5rem;
+            padding: 40px 25px;
+            flex-shrink: 0;
         }
 
         .main-content {
-            width: 65%;
-            padding: 3rem;
+            width: 68%;
+            padding: 50px 40px;
+            background: white;
         }
 
         .section-title {
             border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
             color: #1e293b;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
         }
 
         .profile-img-container {
-            width: 170px;
-            height: 170px;
-            margin-bottom: 1.5rem;
-            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 25px auto;
         }
 
         .profile-img {
@@ -104,93 +78,95 @@
             border-radius: 50%;
             border: 4px solid var(--primary-color);
             background-color: #334155;
-            transition: transform 0.3s ease;
-        }
-
-        .profile-img:hover {
-            transform: scale(1.05);
         }
 
         .skill-tag {
             background: #334155;
-            padding: 0.25rem 0.75rem;
+            padding: 4px 10px;
             border-radius: 4px;
-            font-size: 0.8rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            margin-bottom: 6px;
             display: inline-block;
-            transition: background 0.3s;
         }
 
-        .skill-tag:hover {
-            background: var(--primary-color);
-        }
-
-        /* Social Link Styling */
         .social-btn {
             display: flex;
             align-items: center;
-            padding: 0.6rem;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            margin-bottom: 0.75rem;
-            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            margin-bottom: 10px;
             text-decoration: none;
             color: white;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .social-btn:hover {
-            background: var(--primary-color);
-            transform: translateX(5px);
-            border-color: var(--primary-color);
-        }
-
-        .social-btn i {
-            width: 20px;
-            margin-right: 10px;
-            font-size: 1.1rem;
-        }
-
+        /* Tối ưu khi in */
         @media print {
-            body { background: white; }
-            .cv-container { margin: 0; box-shadow: none; width: 100%; max-width: none; }
-            .no-print { display: none; }
-            .sidebar { -webkit-print-color-adjust: exact; background-color: var(--sidebar-bg) !important; }
-            .animate-fade-in { animation: none; opacity: 1; }
+            body {
+                background: none;
+                padding: 0;
+                margin: 0;
+            }
+            .cv-page {
+                margin: 0;
+                box-shadow: none;
+                width: 210mm;
+                height: 297mm;
+                page-break-after: always;
+            }
+            .no-print {
+                display: none !important;
+            }
+            /* Tránh ngắt đoạn giữa chừng */
+            section, .experience-item {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Hiệu ứng cho Web */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-content {
+            animation: fadeInUp 0.6s ease-out;
         }
     </style>
 </head>
 <body>
 
-    <!-- Floating Print Button -->
-    <div class="no-print fixed bottom-6 right-6 z-50">
-        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center">
-            <i class="fas fa-print text-xl"></i>
+    <!-- Nút in chuyên nghiệp -->
+    <div class="no-print fixed bottom-8 right-8 z-50 flex flex-col items-end gap-2">
+        <div class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium">
+            Sẵn sàng để xuất PDF! <i class="fas fa-check-circle ml-1"></i>
+        </div>
+        <button onclick="window.print()" class="bg-blue-700 hover:bg-blue-800 text-white w-16 h-16 rounded-full shadow-2xl transition transform hover:scale-110 flex items-center justify-center">
+            <i class="fas fa-print text-2xl"></i>
         </button>
     </div>
 
-    <div class="cv-container animate-fade-in" id="cv-content">
+    <div class="cv-page animate-content" id="cv-content">
         <!-- SIDEBAR -->
         <aside class="sidebar">
-            <div class="flex flex-col items-center text-center">
+            <div class="text-center">
                 <div class="profile-img-container">
-                    <!-- Ảnh chân dung từ tệp đính kèm -->
-                    <img src="images/avatarchuong.jpg" 
-                         onerror="this.src='https://ui-avatars.com/api/?name=Bui+Thanh+Chuong&size=180&background=3b82f6&color=fff'"
+                    <img src="C:\Users\Admin\Downloads/avatarchuong.jpg" 
+                         onerror="this.src='https://ui-avatars.com/api/?name=Bui+Thanh+Chuong&size=150&background=3b82f6&color=fff'"
                          alt="Bùi Thanh Chương" class="profile-img">
                 </div>
-                <h1 class="text-2xl font-bold mb-1 uppercase tracking-tight">Bùi Thanh Chương</h1>
-                <p class="text-blue-400 font-medium mb-8 text-sm tracking-wide">IT Intern / AI Enthusiast</p>
+                <h1 class="text-xl font-bold mb-1 uppercase tracking-tight">Bùi Thanh Chương</h1>
+                <p class="text-blue-400 font-medium mb-10 text-xs tracking-widest">IT Intern / AI Enthusiast</p>
             </div>
 
             <div class="space-y-8">
-                <!-- Thông tin liên hệ -->
+                <!-- Liên hệ -->
                 <div>
-                    <h3 class="text-xs font-bold uppercase border-b border-slate-600 pb-2 mb-4 text-blue-400 tracking-widest">Liên hệ</h3>
-                    <ul class="text-sm space-y-3">
+                    <h3 class="text-[11px] font-bold uppercase border-b border-slate-600 pb-2 mb-4 text-blue-400 tracking-[0.15em]">Liên hệ</h3>
+                    <ul class="text-[13px] space-y-4">
                         <li class="flex items-center"><i class="fas fa-phone w-6 text-blue-400"></i> 0396 767 509</li>
-                        <li class="flex items-center"><i class="fas fa-envelope w-6 text-blue-400"></i> <span class="text-xs">buithanhchuong3133@gmail.com</span></li>
+                        <li class="flex items-start"><i class="fas fa-envelope w-6 text-blue-400 mt-1"></i> <span class="break-all">buithanhchuong3133@gmail.com</span></li>
                         <li class="flex items-center"><i class="fas fa-map-marker-alt w-6 text-blue-400"></i> Ninh Kiều, Cần Thơ</li>
                         <li class="flex items-center"><i class="fas fa-calendar-alt w-6 text-blue-400"></i> 02/01/2003</li>
                     </ul>
@@ -198,19 +174,19 @@
 
                 <!-- Mạng xã hội -->
                 <div>
-                    <h3 class="text-xs font-bold uppercase border-b border-slate-600 pb-2 mb-4 text-blue-400 tracking-widest">Mạng xã hội</h3>
-                    <a href="https://facebook.com/yourprofile" target="_blank" class="social-btn">
-                        <i class="fab fa-facebook-f text-blue-500"></i> Facebook
+                    <h3 class="text-[11px] font-bold uppercase border-b border-slate-600 pb-2 mb-4 text-blue-400 tracking-[0.15em]">Mạng xã hội</h3>
+                    <a href="https://www.facebook.com/BuiThanhChuong.NN" target="_blank" class="social-btn">
+                        <i class="fab fa-facebook-f w-5 text-blue-400"></i> Facebook
                     </a>
-                    <a href="https://instagram.com/yourprofile" target="_blank" class="social-btn">
-                        <i class="fab fa-instagram text-pink-500"></i> Instagram
+                    <a href="https://www.instagram.com/thanhchuong__" target="_blank" class="social-btn">
+                        <i class="fab fa-instagram w-5 text-pink-400"></i> Instagram
                     </a>
                 </div>
 
-                <!-- Kỹ năng chuyên môn -->
+                <!-- Kỹ năng -->
                 <div>
-                    <h3 class="text-xs font-bold uppercase border-b border-slate-600 pb-2 mb-4 text-blue-400 tracking-widest">Kỹ năng chuyên môn</h3>
-                    <div class="flex flex-wrap gap-2">
+                    <h3 class="text-[11px] font-bold uppercase border-b border-slate-600 pb-2 mb-4 text-blue-400 tracking-[0.15em]">Kỹ năng chuyên môn</h3>
+                    <div class="flex flex-wrap gap-1.5">
                         <span class="skill-tag">AI Application</span>
                         <span class="skill-tag">Web Development</span>
                         <span class="skill-tag">Prompt Engineering</span>
@@ -223,8 +199,9 @@
 
                 <!-- Kỹ năng mềm -->
                 <div>
-                    <h3 class="text-xs font-bold uppercase border-b border-slate-600 pb-2 mb-4 text-blue-400 tracking-widest">Kỹ năng mềm</h3>
-                    <ul class="text-xs space-y-2 italic text-slate-300">
+                    <h3 class="text-[11px] font-bold uppercase border-b border-slate-600 pb-2 mb-4 text-blue-400 tracking-[0.15em]">Kỹ năng mềm</h3>
+                    <ul class="text-[12px] space-y-2.5 italic text-slate-300">
+			<li>• Đổi mới & Sáng tạo</li>
                         <li>• Kỷ luật & Trách nhiệm cao</li>
                         <li>• Làm việc nhóm hiệu quả</li>
                         <li>• Xử lý tình huống linh hoạt</li>
@@ -237,63 +214,76 @@
         <!-- MAIN CONTENT -->
         <main class="main-content">
             <!-- MỤC TIÊU -->
-            <section class="mb-10">
+            <section class="mb-12">
                 <h2 class="section-title"><i class="fas fa-bullseye mr-3 text-blue-600"></i> Mục tiêu nghề nghiệp</h2>
-                <p class="text-slate-600 leading-relaxed text-sm text-justify">
-                    Là sinh viên năm cuối ngành Công nghệ Thông tin với tư duy kỷ luật được rèn luyện trong môi trường quân ngũ. Tôi mong muốn tìm kiếm vị trí <strong>Thực tập tốt nghiệp</strong> để ứng dụng kiến thức công nghệ, đặc biệt là Trí tuệ nhân tạo (AI) vào việc tối ưu hóa quy trình làm việc và Marketing. Sẵn sàng cống hiến sự chủ động và khả năng học hỏi nhanh để tạo ra giá trị thực cho doanh nghiệp.
+                <p class="text-slate-700 leading-relaxed text-[13.5px] text-justify">
+                    Là sinh viên năm cuối ngành Công nghệ Thông tin với tư duy đổi mới, kỷ luật được rèn luyện trong môi trường quân ngũ. Tôi mong muốn tìm kiếm vị trí <strong>Thực tập tốt nghiệp</strong> để ứng dụng kiến thức công nghệ, kỹ năng lắp ráp, cài đặt và bảo trì phần cứng máy tính, đặc biệt là Trí tuệ nhân tạo (AI) vào việc tối ưu hóa quy trình làm việc và Marketing. Sẵn sàng cống hiến sự chủ động và khả năng học hỏi nhanh để tạo ra giá trị thực cho doanh nghiệp.
                 </p>
             </section>
 
             <!-- HỌC VẤN -->
-            <section class="mb-10">
+            <section class="mb-12">
                 <h2 class="section-title"><i class="fas fa-graduation-cap mr-3 text-blue-600"></i> Trình độ học vấn</h2>
-                <div class="mb-4">
-                    <div class="flex justify-between items-start">
-                        <h3 class="font-bold text-slate-800 text-lg">Trường Cao đẳng Kinh tế - Kỹ thuật Cần Thơ</h3>
-                        <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">2021 - HIỆN TẠI</span>
+                <div class="experience-item">
+                    <div class="flex justify-between items-start mb-1">
+                        <h3 class="font-bold text-slate-800 text-[16px]">CĐ Kinh tế - Kỹ thuật Cần Thơ</h3>
+                        <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-1 rounded">2021 - HIỆN TẠI</span>
                     </div>
-                    <p class="text-slate-600 text-sm italic">Ngành: Công nghệ Thông tin</p>
+                    <p class="text-slate-600 text-[13px] italic">Chuyên ngành: Công nghệ Thông tin</p>
                 </div>
             </section>
 
             <!-- KINH NGHIỆM -->
-            <section class="mb-10">
+            <section class="mb-12">
                 <h2 class="section-title"><i class="fas fa-briefcase mr-3 text-blue-600"></i> Kinh nghiệm rèn luyện</h2>
-                <div class="relative border-l-2 border-blue-200 pl-6 ml-1">
-                    <div class="mb-6">
+                <div class="relative border-l-2 border-blue-100 pl-6 ml-1">
+                    <div class="experience-item mb-8">
                         <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-blue-600 border-2 border-white shadow-sm"></span>
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-slate-800">Phòng Cảnh sát Cơ động</h3>
-                            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">2023 - 2025</span>
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-bold text-slate-800 text-[16px]">Phòng Cảnh sát Cơ động</h3>
+                            <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-1 rounded">2023 - 2025</span>
                         </div>
-                        <p class="text-slate-500 font-medium text-xs mb-3 italic">Thực hiện nghĩa vụ Công an Nhân dân</p>
-                        <ul class="text-slate-600 space-y-2 text-sm text-justify">
-                            <li><i class="fas fa-check-circle text-blue-500 text-[10px] mr-1"></i> Rèn luyện tính kỷ luật tuyệt đối và tinh thần trách nhiệm cao nhất với nhiệm vụ được giao.</li>
-                            <li><i class="fas fa-check-circle text-blue-500 text-[10px] mr-1"></i> Phát triển khả năng làm việc nhóm, hiệp đồng tác chiến và phối hợp hiệu quả trong môi trường áp lực cao.</li>
-                            <li><i class="fas fa-check-circle text-blue-500 text-[10px] mr-1"></i> Kỹ năng xử lý tình huống linh hoạt, giữ bình tĩnh và đưa ra quyết định chính xác trong các điều kiện thực tế khó khăn.</li>
+                        <p class="text-slate-500 font-semibold text-[11px] mb-3 italic">Thực hiện nghĩa vụ Công an Nhân dân</p>
+                        <ul class="text-slate-700 space-y-3 text-[13px] text-justify">
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-blue-500 text-[10px] mr-1"></i>
+                                <span>Rèn luyện tính kỷ luật tuyệt đối và tinh thần trách nhiệm cao nhất với nhiệm vụ.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-blue-500 text-[10px] mr-1"></i>
+                                <span>Phát triển khả năng làm việc nhóm, phối hợp hiệu quả trong môi trường áp lực cao.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-blue-500 text-[10px] mr-1"></i>
+                                <span>Kỹ năng xử lý tình huống linh hoạt, giữ bình tĩnh và đưa ra quyết định chính xác.</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </section>
 
-            <!-- CHI TIẾT KỸ NĂNG CÔNG NGHỆ -->
+            <!-- THẾ MẠNH -->
             <section>
                 <h2 class="section-title"><i class="fas fa-code mr-3 text-blue-600"></i> Thế mạnh công nghệ</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500 hover:shadow-md transition">
-                        <h4 class="font-bold text-slate-800 text-sm mb-2"><i class="fas fa-robot mr-2"></i> AI & Công cụ số</h4>
-                        <p class="text-xs text-slate-600 leading-relaxed">Sử dụng hiệu quả các công cụ AI hỗ trợ tìm kiếm, thiết kế, phân tích dữ liệu và tự động hóa các tác vụ Marketing/Quảng cáo.</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                        <h4 class="font-bold text-slate-800 text-[13px] mb-2 flex items-center">
+                            <i class="fas fa-robot mr-2 "></i> AI & Công cụ số
+                        </h4>
+                        <p class="text-[11.5px] text-slate-600 leading-relaxed">Sử dụng hiệu quả các công cụ AI hỗ trợ tìm kiếm, thiết kế, phân tích dữ liệu và tự động hóa các tác vụ Marketing/Quảng cáo.</p>
                     </div>
-                    <div class="p-4 bg-slate-50 rounded-lg border-l-4 border-slate-500 hover:shadow-md transition">
-                        <h4 class="font-bold text-slate-800 text-sm mb-2"><i class="fas fa-desktop mr-2"></i> Kỹ thuật & Đồ họa</h4>
-                        <p class="text-xs text-slate-600 leading-relaxed">Lắp ráp hệ thống phần cứng. Thành thạo Photoshop, Premiere, CapCut để xây dựng nội dung truyền thông video.</p>
+                    <div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                        <h4 class="font-bold text-slate-800 text-[13px] mb-2 flex items-center">
+                            <i class="fas fa-desktop mr-2 "></i> Kỹ thuật & Đồ họa
+                        </h4>
+                        <p class="text-[11.5px] text-slate-600 leading-relaxed">Lắp ráp hệ thống phần cứng. Thành thạo Photoshop, Premiere, CapCut để xây dựng nội dung truyền thông video.</p>
                     </div>
                 </div>
             </section>
         </main>
     </div>
 
-    <footer class="text-center text-slate-400 text-[10px] py-10 no-print uppercase tracking-widest">
+    <footer class="text-center text-slate-500 text-[10px] py-10 no-print uppercase tracking-[0.2em]">
         &copy; 2025 Bùi Thanh Chương - Portfolio CV
     </footer>
 
